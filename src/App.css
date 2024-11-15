@@ -1,0 +1,54 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #1a1a1a; 
+  color: #f1f1f1; 
+}
+
+.App {
+  text-align: center;
+  padding: 20px;
+}
+
+nav {
+  background-color: #333;
+  padding: 10px;
+}
+
+nav a {
+  color: #f1f1f1;
+  text-decoration: none;
+  margin: 0 15px;
+  font-weight: bold;
+}
+
+nav a:hover {
+  color: #ff4d4d;
+}
+
+.comic-detail {
+  padding: 20px;
+  margin-top: 20px;
+  background-color: #333;
+  border-radius: 8px;
+}
+
+/* Botón de favoritos */
+button {
+  background-color: #ff4d4d;
+  color: white;
+  padding: 10px 20px;
+  margin: 15px 0;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #e60000;
+}
+
+h1, h2, h3 {
+  color: #ff4d4d;
+}
+
