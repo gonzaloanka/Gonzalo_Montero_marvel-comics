@@ -1,4 +1,3 @@
-/**/
 import React, { useEffect, useState } from 'react';
 import { fetchComicDetail } from '../marvelApi';
 import { saveToFavorites, removeFromFavorites, getFavorites } from '../utils/localStorageUtils';
