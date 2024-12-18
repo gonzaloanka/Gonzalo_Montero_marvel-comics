@@ -33,3 +33,13 @@
 .comic:hover {
     transform: scale(1.05);
 }
+
+.characters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 10px;
+}
+
+.character {
+    text-align: center;
+}
