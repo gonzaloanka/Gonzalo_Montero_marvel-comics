@@ -35,18 +35,3 @@ export const fetchComicDetail = async (comicId) => {
     }
 };
 
-// Función para obtener detalles de un personaje usando su resourceURI
-export const fetchCharacterDetail = async (characterURI) => {
-    const ts = Date.now();
-    const hash = CryptoJS.MD5(ts + privateKey + publicKey).toString();
-    const url = `${characterURI}?ts=${ts}&apikey=${publicKey}&hash=${hash}`;
-
-    try {
-        const response = await axios.get(url);
-        return response.data.data.results[0]; // Devuelve los detalles del personaje
-    } catch (error) {
-        console.error("Error al obtener detalles del personaje:", error);
-        return null; // Retorna null en caso de error
-    }
-};
-
