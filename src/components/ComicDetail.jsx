@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { fetchComicDetail, fetchCharacterDetail } from '../marvelApi';
+import { fetchComicDetail } from '../marvelApi';
 import { saveToFavorites, removeFromFavorites, getFavorites } from '../utils/localStorageUtils';
 import { useParams } from 'react-router-dom';
-import './ComicList.css';
 
 const ComicDetail = () => {
     const { comicId } = useParams(); // Obtiene el ID del cómic desde la URL
     const [comic, setComic] = useState(null); // Estado para almacenar el cómic detallado
-    const [characters, setCharacters] = useState([]); // Estado para almacenar los personajes
     const [isFavorite, setIsFavorite] = useState(false); // Estado para indicar si está en favoritos
 
     // Carga los detalles del cómic al montar el componente o cuando cambia comicId
@@ -16,15 +14,6 @@ const ComicDetail = () => {
             const data = await fetchComicDetail(comicId); // Llama a la API para obtener detalles
             setComic(data); // Actualiza el estado con los detalles del cómic
             setIsFavorite(getFavorites().some(fav => fav.id === parseInt(comicId))); // Verifica si es favorito
-
-            // Carga los detalles de los personajes
-            const characterDetails = await Promise.all(
-                data.characters.items.map(async (character) => {
-                    const details = await fetchCharacterDetail(character.resourceURI);
-                    return details;
-                })
-            );
-            setCharacters(characterDetails.filter(Boolean)); // Filtra valores nulos
         };
         loadComicDetail();
     }, [comicId]);
@@ -50,26 +39,16 @@ const ComicDetail = () => {
             </button>
             <p>{comic.description || "No hay descripción disponible."}</p>
             <h3>Personajes:</h3>
-            <div className="characters-grid">
-                {characters.map((character) => (
-                    <div key={character.id} className="character">
-                        <h4>{character.name}</h4>
-                        {character.thumbnail && (
-                            <img
-                                src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
-                                alt={character.name}
-                                style={{ width: '100px', height: '100px' }}
-                            />
-                        )}
-                    </div>
+            <ul>
+                {comic.characters.items.map(character => (
+                    <li key={character.resourceURI}>{character.name}</li>
                 ))}
-            </div>
+            </ul>
         </div>
     );
 };
 
 export default ComicDetail;
-
 
 
 
